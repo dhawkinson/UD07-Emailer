@@ -9,9 +9,9 @@ const bodyParser    = require('body-parser');
 const path          = require('path');
 
 //  local modules
-require('./models/User');
-require('./services/passport');         //  NOTE: this convention means we require nothing from the module, only that the module be loaded
 const keys          = require('./config/keys');
+require('./models/User');         //  NOTE: User must be required before passport because passport uses User
+require('./services/passport');   //  NOTE: this convention means we require nothing from the module, only that the module be loaded
 
 mongoose.connect(keys.mongoURI,{useNewUrlParser: true });
 
@@ -20,7 +20,7 @@ const app     = express();              //  NOTE: to self this is an instance of
 //  middelware -- pre-processing before going to routes
 app.use(
     cookieSession({
-        maxAge: 30*24*60*60*1000,       //  30 days
+        maxAge: 24*60*60*1000,       //  1 day
         keys: [keys.cookieKey]
     })
 );
