@@ -30,13 +30,12 @@ passport.use(
       clientSecret: keys.googleClientSecret,
       callbackURL: '/auth/google/callback',
       proxy: true
-    }, 
-    async (accessToken, refreshToken, profile, done) =>
-    {
+    },
+    async (accessToken, refreshToken, profile, done) => {
       // check to see if user exists
       const existingUser = await User.findOne({ provider: 'google', providerID: profile.id })
       // user exists, don't create a new one & return existing
-      if ( existingUser ) {
+      if (existingUser) {
         return done(null, existingUser);
       }
       // user doesn't exist, create & return a new user
@@ -44,4 +43,4 @@ passport.use(
       done(null, user);
     }
   )
-)
+);
