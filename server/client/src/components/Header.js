@@ -8,46 +8,44 @@ import Payments             from './Payments';
 
 
 class Header extends Component {
-    renderContent() {
-        switch (this.props.auth) {
-            case null:
-                return;
-            case false:
-                return (
-                    <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        <li className="amber-text" style={{ display: 'inline' }}>Login With: </li>
-                        <li><a href="/auth/google"><img alt="Google" src="/images/google.png"/></a></li>
-                        <li><a href="/auth/facebook"><img alt="Facebook" src="/images/facebook.png"/></a></li>
-                        <li><a href="/auth/linkedin"><img alt="LinkedIn" src="/images/linkedin.png"/></a></li>
-                    </ul>
-                );            
-            default:
-                return (
-                    <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        <li><Payments /></li>
-                        <li className="amber-text" style={{ margin: '0px 10px' }}>
-                            Credits: {this.props.auth.credits}
-                        </li>
-                        <li><a className="amber-text" href="/api/logout">Logout</a></li>
-                    </ul>
-                );
-        }
-    }
-    render() {
+  renderContent() {
+    switch (this.props.auth) {
+      case null:
+        return;
+      case false:
         return (
-            <nav>
-                <div className="nav-wrapper blue darken-4">
-                    <Link 
-                        to={this.props.auth ? '/surveys' : '/'} 
-                        className="left brand-logo amber-text">
-                        <img className="responsive-img" id="logo" src="/images/atSign.jpeg" alt="logo"/>
-                        EmailerHawk
-                    </Link>
-                    {this.renderContent()}
-                </div>
-            </nav>
-        );
+          <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <li className="amber-text" style={{ display: 'inline' }}>Login With: </li>
+            <li><a href="/auth/google"><img alt="Google" src="/images/google.png"/></a></li>
+          </ul>
+        );            
+      default:
+        return [
+          <li key='1'><Payments /></li>,
+          <li key='2' className="amber-text" style={{ margin: '0px 10px' }}>
+            Credits: {this.props.auth.credits}
+          </li>,
+          <li key='3'><a className="amber-text" href="/api/logout">Logout</a></li>
+        ]
     }
+  }
+  render() {
+    return (
+      <nav>
+        <div className="nav-wrapper blue darken-4">
+          <Link 
+            to={this.props.auth ? '/surveys' : '/'} 
+            className="left brand-logo amber-text">
+            <img className="responsive-img" id="logo" src="/images/icons8-email.png" alt="logo"  style={{ width: '4rem' }}/>
+            {' '}Emaily
+          </Link>
+          <ul className="right">
+            {this.renderContent()}
+          </ul>
+        </div>
+      </nav>
+    );
+  }
 }
 
 function mapStateToProps({ auth }) {

@@ -24,8 +24,8 @@
     "mongoose": "^5.9.22",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
-    "passport-google-oauth20": "^1.0.0",
+    "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
-    "stripe": "^6.20.1"
+    "stripe": "^6.36.0"
   }
 }

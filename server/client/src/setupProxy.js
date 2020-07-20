@@ -1,5 +1,3 @@
-'use strict';
-
 //  node modules
 const proxy = require('http-proxy-middleware')
  
