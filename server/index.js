@@ -31,6 +31,14 @@ app.use(bodyParser.json());
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 
+// Serve static assets in production - this block is executed in the order presented
+// This results in a process flow that looks like this:
+//    Look for all the routes specified above to resolve routing
+//    If not resolved: Then try using the static file for route resolution
+//    If still not resolved: As a last resort ('*'), return the html file
+// This is done because the build process (which must be executed before deployment to production)
+//    Builds static execution files that replace the whole create-react-app side of the project
+
 if ( process.env.NODE_ENV === 'production' ) {
     //  Express will serve up production assets
     app.use(express.static('client/build'));
